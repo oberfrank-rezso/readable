@@ -1,0 +1,24 @@
+export const ADD_POST = 'ADD_POST';
+export const ADD_POSTS = 'ADD_POSTS';
+export const EDIT_POST = 'EDIT_POST';
+export const REMOVE_POST = 'DELETE_POST';
+export const UPVOTE_POST = 'UPVOTE_POST';
+export const DOWNVOTE_POST = 'DOWNVOTE_POST';
+
+export const ADD_COMMENT = 'NEW_COMMENT';
+export const ADD_COMMENTS = 'ADD_COMMENTS';
+export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
+export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const REMOVE_COMMENT = 'DELETE_COMMENT';
+
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
+
+export const PUSH_LOADING = 'PUSH_LOADING';
+export const POP_LOADING = 'POP_LOADING';
+
+export const ADD_SINGLE = 'ADD_SINGLE';
+export const UPVOTE_SINGLE = 'UPVOTE_SINGLE';
+export const DOWNVOTE_SINGLE = 'DOWNVOTE_SINGLE';
+export const REMOVE_SINGLE = 'REMOVE_SINGLE';
+export const UPDATE_SINGLE = 'UPDATE_SINGLE';
