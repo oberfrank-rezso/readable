@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { Provider } from 'react-redux';
-import store from './redux/store';
+import store from 'config/store';
+import Routes from 'config/routes';
 
-import Routes from './components/Routes';
-import './styles/index.css';
-import './styles/Panel.css';
+import './index.css';
 
 ReactDOM.render(
   <Provider store={store}>
