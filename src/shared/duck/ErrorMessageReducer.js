@@ -1,0 +1,57 @@
+import {
+  FETCH_CATEGORIES_REQUEST,
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_FAILURE,
+} from './CategoryTypes';
+
+import {
+  FETCH_POST_REQUEST,
+  FETCH_POST_SUCCESS,
+  FETCH_POST_FAILURE,
+
+  FETCH_POSTS_REQUEST,
+  FETCH_POSTS_SUCCESS,
+  FETCH_POSTS_FAILURE,
+
+  REMOVE_POST_REQUEST,
+  REMOVE_POST_SUCCESS,
+  REMOVE_POST_FAILURE,
+
+  UPVOTE_POST_REQUEST,
+  UPVOTE_POST_SUCCESS,
+  UPVOTE_POST_FAILURE,
+
+  DOWNVOTE_POST_REQUEST,
+  DOWNVOTE_POST_SUCCESS,
+  DOWNVOTE_POST_FAILURE,
+} from './PostTypes';
+
+export default (state = null, action) => {
+  switch (action.type) {
+    case FETCH_POST_FAILURE:
+    case FETCH_POSTS_FAILURE:
+    case REMOVE_POST_FAILURE:
+    case UPVOTE_POST_FAILURE:
+    case DOWNVOTE_POST_FAILURE:
+    case FETCH_CATEGORIES_FAILURE: {
+      return action.payload.error.message;
+    }
+    case FETCH_POST_REQUEST:
+    case FETCH_POST_SUCCESS:
+    case FETCH_POSTS_REQUEST:
+    case FETCH_POSTS_SUCCESS:
+    case REMOVE_POST_REQUEST:
+    case REMOVE_POST_SUCCESS:
+    case UPVOTE_POST_REQUEST:
+    case UPVOTE_POST_SUCCESS:
+    case DOWNVOTE_POST_REQUEST:
+    case DOWNVOTE_POST_SUCCESS:
+    case FETCH_CATEGORIES_REQUEST:
+    case FETCH_CATEGORIES_SUCCESS: {
+      return null;
+    }
+    default: {
+      return state;
+    }
+  }
+};

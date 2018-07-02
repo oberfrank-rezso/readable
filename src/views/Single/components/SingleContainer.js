@@ -7,41 +7,42 @@ import FourOhFour from 'shared/components/FourOhFour';
 
 import * as CategoryActionCreatores from 'shared/duck/CategoryActions';
 import * as PostActionCreators from 'shared/duck/PostActions';
-import * as LoadingActionCreators from 'shared/duck/LoadingActions';
 
 import SinglePage from './Single';
 
 class SinglePageContainer extends React.Component {
+  state = {
+    loaded: false,
+  };
+
   componentDidMount = () => {
     const {
-      postActions, categoryActions, loadingActions,
+      postActions, categoryActions,
       postId,
     } = this.props;
 
-    categoryActions.getAll();
-
-    postActions.get(postId)
-      .then(() => loadingActions.pop('single'));
-  };
-
-  componentWillUnmount = () => {
-    const { loadingActions } = this.props;
-    loadingActions.push('single');
+    Promise.all([
+      categoryActions.getAll(),
+      postActions.get(postId),
+    ]).finally(() => {
+      this.setState({ loaded: true });
+    });
   };
 
   render = () => {
+    const { loaded } = this.state;
     const {
-      post, postLoaded, postActions,
-      category, categoryLoaded, invalidCategory,
+      post, postActions,
+      category, invalidCategory,
     } = this.props;
 
-    const invalidURL = post === undefined || category !== post.category;
-    if (invalidCategory || (postLoaded && invalidURL)) {
+    const invalidPost = post === undefined || category !== post.category;
+    if (invalidCategory || invalidPost) {
       return <FourOhFour />;
     }
 
     return (
-      <Loader loaded={postLoaded && categoryLoaded}>
+      <Loader loaded={loaded}>
         <SinglePage
           post={post}
           actions={postActions}
@@ -57,11 +58,9 @@ const mapStateToProps = (state, ownProps) => {
 
   return ({
     post: state.posts.get(postId),
-    postLoaded: !state.loading.includes('single'),
     postId,
 
     categories: state.categories,
-    categoryLoaded,
     category,
 
     invalidCategory: (
@@ -76,7 +75,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
   categoryActions: bindActionCreators(CategoryActionCreatores, dispatch),
   postActions: bindActionCreators(PostActionCreators, dispatch),
-  loadingActions: bindActionCreators(LoadingActionCreators, dispatch),
 });
 
 export default connect(

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import qs from 'qs';
 
-import * as CommentActionCreators from '../duck/CommentActions';
+import * as CommentActionCreators from 'shared/duck/CommentActions';
 
 import Comments from './Comments';
 

@@ -1,23 +1,29 @@
 /* eslint import/prefer-default-export:0 */
-import { LOAD_CATEGORIES } from './CategoryTypes';
-import { POP_LOADING } from './LoadingTypes';
+import {
+  FETCH_CATEGORIES_REQUEST,
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_FAILURE,
+} from './CategoryTypes';
 
 import { CategoryAPI } from '../../shared/api/index';
 
-export const getAll = () => dispatch => (
+export const getAll = () => (dispatch) => {
+  dispatch({
+    type: FETCH_CATEGORIES_REQUEST,
+  });
   CategoryAPI.getAll().then(data => (
     dispatch({
-      type: LOAD_CATEGORIES,
+      type: FETCH_CATEGORIES_SUCCESS,
       payload: {
         categories: data.categories,
       },
     })
-  )).then(() => (
+  )).catch(error => (
     dispatch({
-      type: POP_LOADING,
+      type: FETCH_CATEGORIES_FAILURE,
       payload: {
-        item: 'categories',
+        error,
       },
     })
-  ))
-);
+  ));
+};

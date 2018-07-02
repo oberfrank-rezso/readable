@@ -8,15 +8,18 @@ import qs from 'qs';
 import * as PostActionCreators from 'shared/duck/PostActions';
 import * as CategoryActionCreators from 'shared/duck/CategoryActions';
 
-import { sortingOptions, isValidSort } from '../utils/sortUtils';
+import FourOhFour from 'shared/components/FourOhFour';
+import FetchError from 'shared/components/FetchError';
 
+import { sortingOptions, isValidSort } from '../utils/sortUtils';
 import HomePage from './Home';
-import FourOhFour from '../../../shared/components/FourOhFour';
 
 class HomeContainer extends React.Component {
   componentDidMount = () => {
-    this.props.postActions.getAll();
-    this.props.categoryActions.getAll();
+    const { categoryActions, postActions } = this.props;
+
+    categoryActions.getAll();
+    postActions.getAll();
   };
 
   handleCategoryChange = (e) => {
@@ -32,8 +35,20 @@ class HomeContainer extends React.Component {
 
   render = () => {
     const {
-      categories, posts, location, match, postActions, categoriesAreLoaded,
+      categories, posts, location, match, postActions, categoryActions, categoriesAreLoaded, errorMessage,
     } = this.props;
+
+    if (errorMessage) {
+      return (
+        <FetchError
+          message={errorMessage}
+          onRetry={() => {
+            categoryActions.getAll();
+            postActions.getAll();
+          }}
+        />
+      );
+    }
 
     /* deal with category */
     const { category } = match.params;
@@ -83,7 +98,8 @@ class HomeContainer extends React.Component {
 const mapStateToProps = state => ({
   categories: state.categories,
   posts: state.posts,
-  categoriesAreLoaded: !state.loading.includes('categories'),
+  categoriesAreLoaded: !state.loading.includes('CATEGORIES'),
+  errorMessage: state.errorMessage,
 });
 
 const mapDispatchToProps = dispatch => ({

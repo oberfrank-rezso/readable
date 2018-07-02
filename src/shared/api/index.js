@@ -1,5 +1,4 @@
 /* globals fetch:true localStorage:true */
-
 const api = 'http://localhost:3001';
 
 let token = localStorage.getItem('readable:token');
