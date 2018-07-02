@@ -10,7 +10,7 @@ const EditComment = ({ comment, actions, history }) => {
     const form = e.target;
     const { body } = serializeForm(form, { hash: true });
 
-    actions.edit({
+    actions.update({
       id: comment.id,
       timestamp: Date.now(),
       body,

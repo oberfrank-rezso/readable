@@ -65,7 +65,7 @@ export const PostsAPI = {
       },
     }).then(res => res.json())
   ),
-  add: post => (
+  publish: post => (
     fetch(`${api}/posts`, {
       method: 'POST',
       body: JSON.stringify(post),
@@ -82,7 +82,7 @@ export const CommentsAPI = {
     fetch(`${api}/posts/${id}/comments`, { headers })
       .then(res => res.json())
   ),
-  add: comment => (
+  publish: comment => (
     fetch(`${api}/comments`, {
       method: 'POST',
       body: JSON.stringify(comment),
@@ -92,7 +92,7 @@ export const CommentsAPI = {
       },
     }).then(res => res.json())
   ),
-  edit: comment => (
+  update: comment => (
     fetch(`${api}/comments/${comment.id}`, {
       method: 'PUT',
       body: JSON.stringify({

@@ -8,9 +8,8 @@ const Comments = ({
   postId, editId,
 }) => (
   <div className="comments">
-    <div className="comments-header">{comments.size} comments</div>
+    <div className="comments-header">{comments.length} comments</div>
     {comments
-      .toSetSeq()
       .map(comment => (
         comment.id === editId ? (
           <CommentEdit
@@ -26,7 +25,7 @@ const Comments = ({
           />
         )
       ))}
-    <CommentNew postId={postId} addComment={actions.add} />
+    <CommentNew postId={postId} publishComment={actions.publish} />
   </div>
 );
 

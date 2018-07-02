@@ -1,34 +1,35 @@
-import { Map } from 'immutable';
 import {
-  ADD_COMMENT,
-  ADD_COMMENTS,
-  UPVOTE_COMMENT,
-  DOWNVOTE_COMMENT,
-  UPDATE_COMMENT,
-  REMOVE_COMMENT,
+  FETCH_COMMENTS_SUCCESS,
+  UPDATE_COMMENT_SUCCESS,
+  REMOVE_COMMENT_SUCCESS,
+  UPVOTE_COMMENT_SUCCESS,
+  DOWNVOTE_COMMENT_SUCCESS,
+  PUBLISH_COMMENT_SUCCESS,
 } from './CommentTypes';
 
-export default (state = Map(), action) => {
+export default (state = {}, action) => {
   switch (action.type) {
-    case ADD_COMMENT: {
-      const { comment } = action.payload;
-      return state.set(comment.id, comment);
-    }
-    case ADD_COMMENTS: {
+    case FETCH_COMMENTS_SUCCESS: {
       const { comments } = action.payload;
-      return comments.reduce((accumulator, post) => (
-        accumulator.set(post.id, post)
-      ), state);
+      return comments.reduce((accumulator, comment) => ({
+        ...accumulator,
+        [comment.id]: comment,
+      }), state);
     }
-    case UPVOTE_COMMENT:
-    case DOWNVOTE_COMMENT:
-    case UPDATE_COMMENT: {
+    case UPDATE_COMMENT_SUCCESS:
+    case UPVOTE_COMMENT_SUCCESS:
+    case DOWNVOTE_COMMENT_SUCCESS:
+    case PUBLISH_COMMENT_SUCCESS: {
       const { comment } = action.payload;
-      return state.set(comment.id, comment);
+      return {
+        ...state,
+        [comment.id]: comment,
+      };
     }
-    case REMOVE_COMMENT: {
+    case REMOVE_COMMENT_SUCCESS: {
       const { comment } = action.payload;
-      return state.delete(comment.id);
+      const { [comment.id]: deltedComment, ...newState } = state;
+      return newState;
     }
     default: {
       return state;

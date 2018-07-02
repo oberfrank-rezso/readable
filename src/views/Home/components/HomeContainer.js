@@ -1,7 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import Loader from 'react-loader';
 import qs from 'qs';
 
@@ -11,15 +10,27 @@ import * as CategoryActionCreators from 'shared/duck/CategoryActions';
 import FourOhFour from 'shared/components/FourOhFour';
 import FetchError from 'shared/components/FetchError';
 
-import { sortingOptions, isValidSort } from '../utils/sortUtils';
+import { sortingOptions } from '../utils/sortUtils';
 import HomePage from './Home';
 
 class HomeContainer extends React.Component {
+  state = {
+    loaded: false,
+  };
+
   componentDidMount = () => {
+    this.getData();
+  };
+
+  getData = () => {
     const { categoryActions, postActions } = this.props;
 
-    categoryActions.getAll();
-    postActions.getAll();
+    Promise.all([
+      categoryActions.getAll(),
+      postActions.getAll(),
+    ]).finally(() => {
+      this.setState({ loaded: true });
+    });
   };
 
   handleCategoryChange = (e) => {
@@ -34,63 +45,51 @@ class HomeContainer extends React.Component {
   };
 
   render = () => {
-    const {
-      categories, posts, location, match, postActions, categoryActions, categoriesAreLoaded, errorMessage,
-    } = this.props;
+    const { loaded } = this.state;
+    if (!loaded) {
+      return <Loader loaded={loaded} />;
+    }
 
+    const { errorMessage } = this.props;
     if (errorMessage) {
       return (
         <FetchError
           message={errorMessage}
-          onRetry={() => {
-            categoryActions.getAll();
-            postActions.getAll();
+          onReload={() => {
+            this.setState({ loaded: false });
+            this.getData();
           }}
         />
       );
     }
 
-    /* deal with category */
-    const { category } = match.params;
+    const { categories } = this.props;
+    const { category } = this.props.match.params;
     const isAllPosts = category === undefined;
-
-    const categoryPaths = categories.map(el => el.path);
-    const isInvalidCategory = !categoryPaths.includes(category);
-    if (categoriesAreLoaded && !isAllPosts && isInvalidCategory) {
+    const isInvalidCategory = !categories.map(el => el.path).includes(category);
+    if (loaded && !isAllPosts && isInvalidCategory) {
       return <FourOhFour />;
     }
-    /* deal with category */
 
-    const defaultSort = 'dateDesc';
-    const sortQuery = qs.parse(location.search.substring(1)).sort;
-    const isValidSortQuery = isValidSort(sortQuery);
+    const { search } = this.props.location;
+    const sortQuery = qs.parse(search.substring(1)).sort;
+    const sort = sortingOptions[sortQuery] || sortingOptions.dateDesc;
 
-    const sort = isValidSortQuery ? (
-      sortingOptions[sortQuery]
-    ) : (
-      sortingOptions[defaultSort]
-    );
-
-    if (!isValidSortQuery) {
-      return <Redirect to={{ search: `?sort=${defaultSort}` }} />;
-    }
-
+    const { posts, postActions } = this.props;
     return (
-      <Loader loaded={categoriesAreLoaded}>
-        <HomePage
-          title={`${category ? `'${category}'` : 'all'} posts`}
-          sort={sort}
+      <HomePage
+        title={`${category ? `'${category}'` : 'all'} posts`}
+        sort={sort}
 
-          posts={posts}
-          allPosts={isAllPosts}
-          actions={postActions}
-          categories={categories}
-          category={category}
+        posts={posts}
+        allPosts={isAllPosts}
+        actions={postActions}
+        categories={categories}
+        category={category}
 
-          handleCategoryChange={this.handleCategoryChange}
-          handleSortChange={this.handleSortChange}
-        />
-      </Loader>
+        handleCategoryChange={this.handleCategoryChange}
+        handleSortChange={this.handleSortChange}
+      />
     );
   };
 }
@@ -98,7 +97,6 @@ class HomeContainer extends React.Component {
 const mapStateToProps = state => ({
   categories: state.categories,
   posts: state.posts,
-  categoriesAreLoaded: !state.loading.includes('CATEGORIES'),
   errorMessage: state.errorMessage,
 });
 

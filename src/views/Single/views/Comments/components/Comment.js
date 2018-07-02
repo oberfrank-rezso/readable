@@ -22,7 +22,7 @@ const Comment = ({ comment, actions }) => (
           </Link>
           <button
             className="panel-footer-btn"
-            onClick={() => actions.remove(comment.id)}
+            onClick={() => actions.remove({ id: comment.id, parentId: comment.parentId })}
           >delete
           </button>
         </div>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Loader from 'react-loader';
 
 import FourOhFour from 'shared/components/FourOhFour';
+import FetchError from 'shared/components/FetchError';
 
 import * as CategoryActionCreatores from 'shared/duck/CategoryActions';
 import * as PostActionCreators from 'shared/duck/PostActions';
@@ -16,10 +17,11 @@ class SinglePageContainer extends React.Component {
   };
 
   componentDidMount = () => {
-    const {
-      postActions, categoryActions,
-      postId,
-    } = this.props;
+    this.getData();
+  };
+
+  getData = () => {
+    const { postId, postActions, categoryActions } = this.props;
 
     Promise.all([
       categoryActions.getAll(),
@@ -31,44 +33,49 @@ class SinglePageContainer extends React.Component {
 
   render = () => {
     const { loaded } = this.state;
-    const {
-      post, postActions,
-      category, invalidCategory,
-    } = this.props;
+    if (!loaded) {
+      return <Loader loaded={loaded} />;
+    }
 
+    const { errorMessage } = this.props;
+    if (errorMessage) {
+      return (
+        <FetchError
+          message={errorMessage}
+          onReload={() => {
+            this.setState({ loaded: false });
+            this.getData();
+          }}
+        />
+      );
+    }
+
+    const { post, category, categories } = this.props;
     const invalidPost = post === undefined || category !== post.category;
-    if (invalidCategory || invalidPost) {
+    const invalidCategory = !categories.map(el => el.path).includes(category);
+    if (invalidPost || invalidCategory) {
       return <FourOhFour />;
     }
 
+    const { postActions } = this.props;
     return (
-      <Loader loaded={loaded}>
-        <SinglePage
-          post={post}
-          actions={postActions}
-        />
-      </Loader>
+      <SinglePage
+        post={post}
+        actions={postActions}
+      />
     );
   };
 }
 
 const mapStateToProps = (state, ownProps) => {
   const { category, postId } = ownProps.match.params;
-  const categoryLoaded = !state.loading.includes('categories');
 
   return ({
-    post: state.posts.get(postId),
+    post: state.posts[postId],
     postId,
-
     categories: state.categories,
     category,
-
-    invalidCategory: (
-      categoryLoaded &&
-      !state.categories
-        .map(el => el.path)
-        .includes(category)
-    ),
+    errorMessage: state.errorMessage,
   });
 };
 

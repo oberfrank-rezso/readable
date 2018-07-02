@@ -11,7 +11,7 @@ export const getAll = () => (dispatch) => {
   dispatch({
     type: FETCH_CATEGORIES_REQUEST,
   });
-  CategoryAPI.getAll().then(data => (
+  return CategoryAPI.getAll().then(data => (
     dispatch({
       type: FETCH_CATEGORIES_SUCCESS,
       payload: {

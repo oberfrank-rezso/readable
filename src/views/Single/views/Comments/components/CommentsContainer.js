@@ -10,15 +10,15 @@ import Comments from './Comments';
 
 class CommentsContainer extends React.Component {
   componentDidMount() {
-    this.props.actions.loadByPost(this.props.postId);
+    this.props.actions.getByPost(this.props.postId);
   }
 
   render = () => {
     const {
-      comments: unfilteredComments, actions,
+      comments: rawComments, actions,
       postId, location,
     } = this.props;
-    const comments = unfilteredComments.filter(comment => comment.parentId === postId);
+    const comments = Object.values(rawComments).filter(comment => comment.parentId === postId);
 
     const editId = qs.parse(location.search.substring(1)).editingComment;
 

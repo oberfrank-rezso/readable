@@ -2,14 +2,13 @@ import React from 'react';
 import Post from '../../../shared/components/Post';
 
 const HomeList = ({
-  posts = [],
+  posts = {},
   actions = {},
   filterFunction = () => true,
   sortFunction = () => true,
 }) => (
   <div className="post-list">
-    { posts
-      .toSetSeq()
+    { Object.values(posts)
       .filter(filterFunction)
       .sort(sortFunction)
       .map(post => (

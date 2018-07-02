@@ -27,12 +27,8 @@ const Post = ({ post, actions, single = false }) => (
         <div className="panel-footer-text">
           <img src={AuthorIcon} alt="" />
           {post.author} |
-          { !single && (
-            <React.Fragment>
-              <img src={CommentIcon} alt="" />
-              {post.commentCount} |
-            </React.Fragment>
-          )}
+          <img src={CommentIcon} alt="" />
+          {post.commentCount} |
           {` ${new Date(post.timestamp).toLocaleString()}`}
         </div>
         <div className="panel-footer-btns">
@@ -43,7 +39,9 @@ const Post = ({ post, actions, single = false }) => (
           </Link>
           <button
             className="panel-footer-btn"
-            onClick={() => actions.remove(post.id)}
+            onClick={() => {
+              actions.remove(post.id);
+            }}
           >delete
           </button>
         </div>

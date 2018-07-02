@@ -6,6 +6,7 @@ import Comments from '../views/Comments';
 
 const SinglePage = ({
   post, actions,
+  handleRemovePost,
 }) => (
   <div className="single-page">
     <div className="back-to-homepage">
@@ -14,6 +15,7 @@ const SinglePage = ({
     <Post
       post={post}
       actions={actions}
+      handleRemovePost={handleRemovePost}
       single
     />
     <Comments postId={post.id} />
