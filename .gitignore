@@ -18,7 +18,7 @@
 .eslintrc.js
 
 # vscode
-/.vscode
+.vscode
 
 # misc
 .DS_Store
