@@ -34,7 +34,7 @@ const Post = ({ post, actions, single = false }) => (
         <div className="panel-footer-btns">
           <Link
             className="panel-footer-btn"
-            to={`/${post.category}/${post.id}?editing`}
+            to={`/${post.category}/${post.id}?edit`}
           >edit
           </Link>
           <button

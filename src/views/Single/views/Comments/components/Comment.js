@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import AuthorIcon from '../../../../../shared/assets/author-icon.svg';
+import AuthorIcon from 'shared/assets/author-icon.svg';
 
-const Comment = ({ comment, actions }) => (
+const Comment = ({ comment, actions, setEditId }) => (
   <div className="panel">
     <div className="panel-main">
       <div className="panel-body">
@@ -15,11 +14,11 @@ const Comment = ({ comment, actions }) => (
           {comment.author} | {new Date(comment.timestamp).toLocaleString()}
         </div>
         <div className="panel-footer-btns">
-          <Link
+          <button
             className="panel-footer-btn"
-            to={{ search: `?editingComment=${comment.id}` }}
+            onClick={() => setEditId(comment.id)}
           >edit
-          </Link>
+          </button>
           <button
             className="panel-footer-btn"
             onClick={() => actions.remove({ id: comment.id, parentId: comment.parentId })}

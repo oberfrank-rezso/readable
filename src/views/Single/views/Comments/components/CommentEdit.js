@@ -1,34 +1,42 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import serializeForm from 'form-serialize';
 
-import AuthorIcon from '../../../../../shared/assets/author-icon.svg';
+import AuthorIcon from 'shared/assets/author-icon.svg';
 
-const EditComment = ({ comment, actions, history }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const { body } = serializeForm(form, { hash: true });
-
-    actions.update({
-      id: comment.id,
-      timestamp: Date.now(),
-      body,
-    });
-
-    history.push({ search: '' });
+class EditComment extends React.Component {
+  state = {
+    body: this.props.comment.body,
   };
 
-  return (
-    <form className="panel" onSubmit={handleSubmit}>
+  handleInputChange = (e) => {
+    const { value } = e.target;
+    this.setState({
+      body: value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { actions, unsetEditId } = this.props;
+
+    actions.update({
+      id: this.props.comment.id,
+      body: this.state.body,
+      timestamp: Date.now(),
+    }).then(() => {
+      unsetEditId();
+    });
+  };
+
+  render = () => (
+    <form className="panel" onSubmit={this.handleSubmit}>
       <div className="panel-main">
         <div className="panel-body">
-          <input name="body" type="text" defaultValue={comment.body} required />
+          <input name="body" type="text" value={this.state.body} onChange={this.handleInputChange} required />
         </div>
         <div className="panel-footer">
           <div className="panel-footer-text">
             <img src={AuthorIcon} alt="" />
-            {comment.author}
+            {this.props.comment.author}
           </div>
           <div className="panel-footer-btns">
             <button
@@ -36,16 +44,17 @@ const EditComment = ({ comment, actions, history }) => {
               type="submit"
             >submit
             </button>
-            <Link
+            <button
               className="panel-footer-btn"
-              to={{ search: '' }}
+              type="button"
+              onClick={this.props.unsetEditId}
             >cancel
-            </Link>
+            </button>
           </div>
         </div>
       </div>
     </form>
   );
-};
+}
 
-export default withRouter(EditComment);
+export default EditComment;

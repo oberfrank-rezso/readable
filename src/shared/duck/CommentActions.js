@@ -87,7 +87,7 @@ export const update = comment => (dispatch) => {
       id: comment.id,
     },
   });
-  CommentsAPI.update(comment).then(responsePost => (
+  return CommentsAPI.update(comment).then(responsePost => (
     dispatch({
       type: UPDATE_COMMENT_SUCCESS,
       payload: {

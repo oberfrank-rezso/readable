@@ -4,8 +4,8 @@ import CommentNew from './CommentNew';
 import CommentEdit from './CommentEdit';
 
 const Comments = ({
-  comments, actions,
-  postId, editId,
+  postId, comments, actions,
+  editId, setEditId, unsetEditId,
 }) => (
   <div className="comments">
     <div className="comments-header">{comments.length} comments</div>
@@ -16,12 +16,14 @@ const Comments = ({
             key={`comment-${comment.id}`}
             comment={comment}
             actions={actions}
+            unsetEditId={unsetEditId}
           />
         ) : (
           <Comment
             key={`comment-${comment.id}`}
             comment={comment}
             actions={actions}
+            setEditId={setEditId}
           />
         )
       ))}

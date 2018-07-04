@@ -4,7 +4,7 @@ import Loader from 'react-loader';
 import uuidv1 from 'uuid/v1';
 
 import { getAll as getCategories } from 'shared/duck/CategoryActions';
-import { publish as publishPost } from 'shared/duck/PostActions';
+import { publish as publishPost, update as updatePost } from 'shared/duck/PostActions';
 
 import FetchError from 'shared/components/FetchError';
 import Compose from './Compose';
@@ -97,6 +97,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(getCategories()),
   publishPost: post => dispatch(publishPost(post)),
+  updatePost: post => dispatch(updatePost(post)),
 });
 
 export default connect(
