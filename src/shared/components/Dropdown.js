@@ -1,12 +1,12 @@
 import React from 'react';
 
 const Dropdown = ({
-  onChange: handleChange, defaultValue, options, name, required = false,
+  onChange: handleChange, value, options, name, required = false,
 }) => (
   <select
     className="dropdown"
     name={name}
-    defaultValue={defaultValue || options[0]}
+    value={value}
     onChange={handleChange}
     required={required}
   >{options.map(option => (

@@ -1,71 +1,104 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import AuthorIcon from '../assets/author-icon.svg';
-import CommentIcon from '../assets/comment-icon.svg';
+import uuidv1 from 'uuid/v1';
+import Panel from './Panel';
+import Button from './Button';
 
 const Post = ({ post, actions, single = false }) => (
-  <div className={`panel ${single && 'panel-single'}`}>
-    <div className="panel-main">
-      { single ? (
-        <div className="panel-title">
-          <h2>{post.title}</h2>
-        </div>
-      ) : (
-        <Link
-          className="panel-title"
-          to={`/${post.category}/${post.id}`}
-        ><h2>{post.title}</h2>
-        </Link>
-      )}
-      { single && (
-        <div className="panel-body">
-          <p>{post.body}</p>
-        </div>
-      )}
-      <div className="panel-footer">
-        <div className="panel-footer-text">
-          <img src={AuthorIcon} alt="" />
-          {post.author} |
-          <img src={CommentIcon} alt="" />
-          {post.commentCount} |
-          {` ${new Date(post.timestamp).toLocaleString()}`}
-        </div>
-        <div className="panel-footer-btns">
-          <Link
-            className="panel-footer-btn"
-            to={`/${post.category}/${post.id}?edit`}
-          >edit
-          </Link>
-          <button
-            className="panel-footer-btn"
-            onClick={() => {
-              actions.remove(post.id);
-            }}
-          >delete
-          </button>
-        </div>
-      </div>
-    </div>
-    <div className="panel-side panel-side-corner">
-      <button
-        className="panel-side-btn upvote"
-        onClick={() => actions.upvote(post.id)}
+  <Panel>
+    <Panel.Main>
+      <Panel.Body>
+        <Panel.Title
+          post={{
+            title: post.title,
+            category: post.category,
+            id: post.id,
+          }}
+          withLink={!single}
+        />
+        {single && <Panel.Text text={post.body} />}
+      </Panel.Body>
+      <Panel.Vote
+        score={post.voteScore}
+        onUpvote={() => actions.upvote(post.id)}
+        onDownvote={() => actions.downvote(post.id)}
       />
-      <div className="panel-side-vote">
-        <div className="panel-side-vote-score">
-          {post.voteScore}
-        </div>
-        <div className="panel-side-vote-text">
-          votes
-        </div>
-      </div>
-      <button
-        className="panel-side-btn downvote"
-        onClick={() => actions.downvote(post.id)}
+    </Panel.Main>
+    <Panel.Footer>
+      <Panel.Footer.Meta
+        author={post.author}
+        commentCount={post.commentCount}
+        timestamp={post.timestamp}
       />
-    </div>
-  </div>
+      <Panel.Footer.Buttons>
+        <Button text="delete" secondary onClick={() => actions.remove(post.id)} />
+        <Button text="edit" onClick={() => actions.openEdit(post)} />
+      </Panel.Footer.Buttons>
+    </Panel.Footer>
+  </Panel>
 );
 
-export default Post;
+export class Form extends React.Component {
+  state = this.props.post ? (
+    this.props.post
+  ) : ({
+    title: '',
+    body: '',
+    author: 'anonymus',
+    category: this.props.categories.map(el => el.path)[0],
+    id: uuidv1(),
+  });
+
+  onInputChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { onSubmit } = this.props;
+
+    onSubmit({
+      ...this.state,
+      timestamp: this.state.timestamp ? this.state.timestamp : Date.now(),
+    });
+  };
+
+  render = () => {
+    const isNew = this.props.post === null;
+    const { categories, onCancel } = this.props;
+    const {
+      title, body, author,
+      category,
+    } = this.state;
+
+    return (
+      <Panel.Form onSubmit={this.handleSubmit}>
+        <Panel.Header title={isNew ? 'New post' : 'Edit post'} />
+        <Panel.Main>
+          <Panel.Body>
+            <Panel.Input name="title" value={title} onChange={this.onInputChange} required />
+            <Panel.Input name="body" value={body} onChange={this.onInputChange} required />
+            { isNew && (
+              <React.Fragment>
+                <Panel.Input name="author" value={author} onChange={this.onInputChange} required />
+                <Panel.Input name="category" dropdown options={categories} value={category} onChange={this.onInputChange} required />
+              </React.Fragment>
+            )}
+          </Panel.Body>
+        </Panel.Main>
+        <Panel.Footer>
+          <Panel.Footer.Buttons>
+            <Button text="cancel" secondary onClick={onCancel} />
+            <Button text="submit" submit />
+          </Panel.Footer.Buttons>
+        </Panel.Footer>
+      </Panel.Form>
+    );
+  };
+}
+
+export default Object.assign(Post, {
+  Form,
+});
