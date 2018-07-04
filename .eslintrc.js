@@ -1,26 +1,6 @@
 module.exports = {
-  extends: [
-    "react-app",
-    "airbnb"
-  ],
+  extends: "react-app",
   rules: {
-    "jsx-a11y/href-no-hash": "off",
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
-    "react/prop-types": [0],
-    "jsx-a11y/anchor-is-valid": [ "error", {
-      "components": [ "Link" ],
-      "specialLink": [ "hrefLeft", "hrefRight", "to" ],
-      "aspects": [ "noHref", "invalidHref", "preferButton" ]
-    }]
-  },
-  settings: {
-    "import/resolver": {
-      node: {
-        moduleDirectory: [
-          "node_modules",
-          "src",
-        ]
-      }
-    }
+    "jsx-a11y/href-no-hash": 0 // quickfix for vs code
   }
 };

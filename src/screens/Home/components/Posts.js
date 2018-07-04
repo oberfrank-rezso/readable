@@ -1,13 +1,12 @@
 import React from 'react';
-import Post from '../../../shared/components/Post';
+import Post from 'shared/components/Post';
 
-const HomeList = ({
-  posts = {},
-  actions = {},
+export default ({
+  posts = {}, actions = {},
   filterFunction = () => true,
   sortFunction = () => true,
 }) => (
-  <div className="post-list">
+  <div className="posts">
     { Object.values(posts)
       .filter(filterFunction)
       .sort(sortFunction)
@@ -21,5 +20,3 @@ const HomeList = ({
     }
   </div>
 );
-
-export default HomeList;

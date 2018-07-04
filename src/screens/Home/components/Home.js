@@ -2,7 +2,7 @@ import React from 'react';
 
 import Button from 'shared/components/Button';
 import Dropdown from 'shared/components/Dropdown';
-import HomePostList from './HomeList';
+import Posts from './Posts';
 
 import { createSortByPropertyFunction, sortingOptions } from '../utils/sortUtils';
 
@@ -41,7 +41,7 @@ const Home = ({
         />
       </div>
     </div>
-    <HomePostList
+    <Posts
       posts={posts}
       actions={actions}
       sortFunction={createSortByPropertyFunction({
