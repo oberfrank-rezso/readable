@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Dropdown from '../../../shared/components/Dropdown';
-import Header from '../../../shared/components/Header';
+import Dropdown from 'shared/components/Dropdown';
+import Header from 'shared/components/Header';
 import HomePostList from './HomeList';
 
 import { createSortByPropertyFunction, sortingOptions } from '../utils/sortUtils';
