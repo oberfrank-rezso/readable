@@ -17,6 +17,9 @@
 # eslint
 .eslintrc.js
 
+# vscode
+/.vscode
+
 # misc
 .DS_Store
 .env.local
