@@ -10,6 +10,7 @@ Clone the repository and install dependecies. Run the development server using `
 
 ```bash
 $ git clone https://github.com/oberfrank-rezso/readable
+$ cd readable
 $ npm install
 $ npm start
 ```
