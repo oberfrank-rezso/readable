@@ -45,8 +45,8 @@ const Home = ({
       posts={posts}
       actions={actions}
       sortFunction={createSortByPropertyFunction({
-        property: sort.property,
-        isAscending: sort.isAscending,
+        property: sortingOptions[sort].property,
+        isAscending: sortingOptions[sort].isAscending,
       })}
       filterFunction={
         post => allPosts || post.category === category
