@@ -1,4 +1,4 @@
-# Readable: A Book Lending App
+# Readable: A Content and Comment App
 
 A React.js content and comment web application built with `redux` and `react-router` that allows you to post content to predefined categories, comment on posts, and vote on posts and comments. You can also edit and delete posts and comments.
 
