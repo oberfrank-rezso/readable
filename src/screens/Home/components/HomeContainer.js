@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import Loader from 'react-loader';
 import qs from 'qs';
 
-import * as PostActionCreators from 'duck/PostActions';
-import * as CategoryActionCreators from 'duck/CategoryActions';
+import * as PostActionCreators from 'duck/postActions';
+import * as CategoryActionCreators from 'duck/categoryActions';
 
 import FourOhFour from 'shared/components/FourOhFour';
-import FetchError from 'shared/components/FetchError';
+import Error from 'shared/components/Error';
 
 import { sortingOptions } from '../utils/sortUtils';
 import HomePage from './Home';
@@ -53,7 +53,7 @@ class HomeContainer extends React.Component {
     const { errorMessage } = this.props;
     if (errorMessage) {
       return (
-        <FetchError
+        <Error
           message={errorMessage}
           onReload={() => {
             this.setState({ loaded: false });

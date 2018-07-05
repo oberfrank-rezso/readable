@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import Loader from 'react-loader';
 import ReactModal from 'react-modal';
 
-import * as PostActionCreators from 'duck/PostActions';
+import * as PostActionCreators from 'duck/postActions';
 
 import { Form } from 'shared/components/Post';
-import FetchError from 'shared/components/FetchError';
+import Error from 'shared/components/Error';
 
 ReactModal.setAppElement('#root');
 
@@ -42,9 +42,9 @@ const Modal = ({
   modal: { isOpen, isLoading, post }, actions, categories, errorMessage,
 }) => {
   const isNew = post === null;
-  if (errorMessage) {
+  if (isOpen && errorMessage) {
     return (
-      <FetchError
+      <Error
         message={errorMessage}
         onReload={isNew ? actions.openNew : () => actions.openEdit(post)}
       />

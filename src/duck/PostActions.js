@@ -2,6 +2,7 @@ import { PostsAPI } from 'api';
 
 import {
   FETCH_POST_REQUEST,
+  FETCH_POST_NOT_FOUND,
   FETCH_POST_SUCCESS,
   FETCH_POST_FAILURE,
 
@@ -32,7 +33,7 @@ import {
   NEW_POST_FAILURE,
   NEW_POST_OPEN,
   NEW_POST_CANCEL,
-} from './PostTypes';
+} from './postTypes';
 
 export const get = id => (dispatch) => {
   dispatch({
@@ -43,14 +44,19 @@ export const get = id => (dispatch) => {
       },
     },
   });
-  return PostsAPI.get(id).then(post => (
-    dispatch({
+  return PostsAPI.get(id).then(post => {
+    if (post.error) {
+      return dispatch({
+        type: FETCH_POST_NOT_FOUND,
+      });
+    }
+    return dispatch({
       type: FETCH_POST_SUCCESS,
       payload: {
         post,
       },
     })
-  )).catch(error => (
+  }).catch(error => (
     dispatch({
       type: FETCH_POST_FAILURE,
       payload: {
@@ -238,5 +244,10 @@ export const openEdit = post => ({
   },
 });
 
-export const cancelNew = () => ({ type: NEW_POST_CANCEL });
-export const cancelEdit = () => ({ type: EDIT_POST_CANCEL });
+export const cancelNew = () => ({
+  type: NEW_POST_CANCEL,
+});
+
+export const cancelEdit = () => ({
+  type: EDIT_POST_CANCEL,
+});

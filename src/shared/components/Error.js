@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#root');
 
-const FetchError = ({ message, onReload }) => (
+const Error = ({ message, onReload }) => (
   <ReactModal isOpen style={{ zIndex: 1000 }} shouldCloseOnOverlayClick={false}>
     <div className="error-message">
       <h1>Something went wrong</h1>
@@ -13,4 +13,4 @@ const FetchError = ({ message, onReload }) => (
   </ReactModal>
 );
 
-export default FetchError;
+export default Error;

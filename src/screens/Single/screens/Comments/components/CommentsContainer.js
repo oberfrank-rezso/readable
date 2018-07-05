@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as CommentActionCreators from 'duck/CommentActions';
+import * as CommentActionCreators from 'duck/commentActions';
 import Comments from './Comments';
 
 class CommentsContainer extends React.Component {

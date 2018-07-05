@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import Loader from 'react-loader';
 
 import FourOhFour from 'shared/components/FourOhFour';
-import FetchError from 'shared/components/FetchError';
+import Error from 'shared/components/Error';
 
-import * as CategoryActionCreatores from 'duck/CategoryActions';
-import * as PostActionCreators from 'duck/PostActions';
+import * as CategoryActionCreatores from 'duck/categoryActions';
+import * as PostActionCreators from 'duck/postActions';
 
 import SinglePage from './Single';
 
@@ -40,7 +40,7 @@ class SinglePageContainer extends React.Component {
     const { errorMessage } = this.props;
     if (errorMessage) {
       return (
-        <FetchError
+        <Error
           message={errorMessage}
           onReload={() => {
             this.setState({ loaded: false });

@@ -4,7 +4,7 @@ import {
   FETCH_CATEGORIES_REQUEST,
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILURE,
-} from './CategoryTypes';
+} from './categoryTypes';
 
 
 export const getAll = () => (dispatch) => {

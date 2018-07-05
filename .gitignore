@@ -1,12 +1,8 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+# server
+/api-server
 
 # dependencies
 /node_modules
-/api-server
-/build
-
-# testing
-/coverage
 
 # production
 /build
@@ -15,10 +11,7 @@
 /src/**/*.css
 
 # eslint
-.eslintrc.js
-
-# vscode
-.vscode
+/.eslintrc.js
 
 # misc
 .DS_Store

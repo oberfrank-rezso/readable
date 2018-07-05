@@ -6,11 +6,11 @@ import {
   REMOVE_POST_SUCCESS,
   UPVOTE_POST_SUCCESS,
   DOWNVOTE_POST_SUCCESS,
-} from './PostTypes';
+} from './postTypes';
 import {
   PUBLISH_COMMENT_SUCCESS,
   REMOVE_COMMENT_SUCCESS,
-} from './CommentTypes';
+} from './commentTypes';
 
 export default (state = {}, action) => {
   switch (action.type) {

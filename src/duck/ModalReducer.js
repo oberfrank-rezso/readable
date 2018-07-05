@@ -10,7 +10,7 @@ import {
   EDIT_POST_REQUEST,
   EDIT_POST_SUCCESS,
   EDIT_POST_FAILURE,
-} from './PostTypes';
+} from './postTypes';
 
 const initialState = {
   isLoading: false,

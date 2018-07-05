@@ -2,7 +2,7 @@ import {
   FETCH_CATEGORIES_REQUEST,
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILURE,
-} from './CategoryTypes';
+} from './categoryTypes';
 
 import {
   FETCH_POST_REQUEST,
@@ -34,7 +34,7 @@ import {
   EDIT_POST_REQUEST,
   EDIT_POST_SUCCESS,
   EDIT_POST_FAILURE,
-} from './PostTypes';
+} from './postTypes';
 
 import {
   FETCH_COMMENTS_REQUEST,
@@ -56,7 +56,7 @@ import {
   PUBLISH_COMMENT_REQUEST,
   PUBLISH_COMMENT_FAILURE,
   PUBLISH_COMMENT_SUCCESS,
-} from './CommentTypes';
+} from './commentTypes';
 
 export default (state = null, action) => {
   switch (action.type) {

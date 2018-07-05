@@ -24,7 +24,7 @@ import {
   PUBLISH_COMMENT_REQUEST,
   PUBLISH_COMMENT_SUCCESS,
   PUBLISH_COMMENT_FAILURE,
-} from './CommentTypes';
+} from './commentTypes';
 
 export const getByPost = id => (dispatch) => {
   dispatch({

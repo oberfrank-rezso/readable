@@ -1,7 +1,7 @@
 import {
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILURE,
-} from './CategoryTypes';
+} from './categoryTypes';
 
 const categories = (state = [], action) => {
   switch (action.type) {

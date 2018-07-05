@@ -5,7 +5,7 @@ import {
   UPVOTE_COMMENT_SUCCESS,
   DOWNVOTE_COMMENT_SUCCESS,
   PUBLISH_COMMENT_SUCCESS,
-} from './CommentTypes';
+} from './commentTypes';
 
 export default (state = {}, action) => {
   switch (action.type) {
