@@ -64,10 +64,10 @@ const Footer = ({ children }) => (
 
 const FooterMeta = ({ author, commentCount, timestamp }) => (
   <div className="meta">
-    <img src={AuthorIcon} alt="" />{` ${author}`}
+    <img src={AuthorIcon} alt="icon before the authors name" />{` ${author}`}
     {commentCount !== undefined && (
       <React.Fragment>
-        {' | '}<img src={CommentIcon} alt="" /> {commentCount}
+        {' | '}<img src={CommentIcon} alt="icon before the comment count" /> {commentCount}
       </React.Fragment>
     )}
     {timestamp !== undefined && ` | ${new Date(timestamp).toLocaleString()}`}
