@@ -10,7 +10,7 @@ const Home = ({
   title, posts, actions, categories, category, allPosts, sort,
   handleCategoryChange, handleSortChange,
 }) => (
-  <div className="posts-page">
+  <div className="home">
     <h1 className="home-title">{title}</h1>
     <div className="home-control">
       <Button text="New post" onClick={actions.openNew} />
@@ -36,7 +36,7 @@ const Home = ({
                 value: key,
               }))
           }
-          defaultValue={sort}
+          value={sort}
           onChange={handleSortChange}
         />
       </div>

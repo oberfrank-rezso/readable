@@ -73,7 +73,8 @@ class HomeContainer extends React.Component {
 
     const { search } = this.props.location;
     const sortQuery = qs.parse(search.substring(1)).sort;
-    const sort = sortingOptions[sortQuery] || sortingOptions.dateDesc;
+    const isValidSort = Object.keys(sortingOptions).includes(sortQuery);
+    const sort = isValidSort ? sortQuery : 'dateDesc';
 
     const { posts, postActions } = this.props;
     return (

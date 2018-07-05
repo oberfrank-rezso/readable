@@ -5,7 +5,7 @@ import Post from 'shared/components/Post';
 import Comments from '../screens/Comments';
 
 const Single = ({ post, actions }) => (
-  <div className="single-page">
+  <div className="single">
     <div className="back-to-homepage">
       <Link to="/">back to homepage</Link>
     </div>
