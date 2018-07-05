@@ -7,9 +7,6 @@
 # production
 /build
 
-# styles
-/src/**/*.css
-
 # eslint
 /.eslintrc.js
 

@@ -26,7 +26,7 @@ html, body {
   line-height: 2em; }
 
 .btn {
-  background-color: #999999;
+  background-color: #999;
   border: none;
   border-radius: 2px;
   color: white;
@@ -82,14 +82,14 @@ html, body {
           padding: 8px;
           min-width: 70px; }
         .panel .main .body .input-row .dropdown {
-          box-shadow: inset 0 -1px 6px -2px #999999;
+          box-shadow: inset 0 -1px 6px -2px #999;
           width: 100%;
           padding: 4px; }
         .panel .main .body .input-row .input {
           flex-grow: 1;
           font-size: 16px;
           background-color: transparent;
-          box-shadow: inset 0 -1px 6px -2px #999999;
+          box-shadow: inset 0 -1px 6px -2px #999;
           padding: 8px;
           border: none; }
     .panel .main .vote {
@@ -116,7 +116,7 @@ html, body {
         .panel .main .vote .btn:last-child {
           transform: scaleY(-1); }
         .panel .main .vote .btn:hover {
-          background-color: #D8D8D8; }
+          background-color: #d8d8d8; }
   .panel .footer {
     display: flex;
     flex-wrap: wrap;
@@ -141,4 +141,4 @@ html, body {
     margin-bottom: 32px; }
   .four-oh-four .description {
     font-size: 24px;
-    color: #999999; }
+    color: #999; }
