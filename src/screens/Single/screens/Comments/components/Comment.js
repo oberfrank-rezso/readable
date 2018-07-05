@@ -35,7 +35,6 @@ class Form extends React.Component {
     body: '',
     author: 'anonymus',
     parentId: this.props.postId,
-    id: uuidv1(),
   });
 
   handleInputChange = (e) => {
@@ -57,7 +56,7 @@ class Form extends React.Component {
       if (this.props.comment) {
         unsetEditId();
       } else {
-        this.setState({ body: '', author: 'anonymus' });
+        this.setState({ body: '', author: 'anonymus',  id: uuidv1() });
         form.reset();
       }
     });
