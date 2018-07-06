@@ -21,12 +21,15 @@
   },
   "scripts": {
     "start": "npm-run-all -p watch-css start-js",
-    "start-js": "NODE_PATH=src react-scripts start",
+    "start-js": "cross-env NODE_PATH=src react-scripts start",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "build": "npm-run-all build-css build-js",
-    "build-js": "NODE_PATH=src react-scripts build",
+    "build-js": "cross-env NODE_PATH=src react-scripts build",
     "build-css": "node-sass-chokidar src/ -o src/",
-    "test": "NODE_PATH=src react-scripts test --env=jsdom",
+    "test": "cross-env NODE_PATH=src react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
   }
 }
