@@ -28,7 +28,7 @@ Folder structure is a blend of the [duck](https://medium.freecodecamp.org/scalin
 
 State is mostly managed by **redux** meaning forms and individual loading flags of components are excluded from the store.
 
-Networks errors are handled as shown by @gaearon on [one of his egghead.io courses](https://egghead.io/lessons/javascript-redux-displaying-error-messages).
+Network errors are handled as shown by @gaearon on [one of his egghead.io courses](https://egghead.io/lessons/javascript-redux-displaying-error-messages).
 
 ## Acknowledgments
 
