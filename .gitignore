@@ -1,6 +1,3 @@
-# fix for npm5 bug
-package-lock.json
-
 # server
 /api-server
 
