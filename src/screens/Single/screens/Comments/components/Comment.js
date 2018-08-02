@@ -35,6 +35,7 @@ class Form extends React.Component {
     body: '',
     author: 'anonymus',
     parentId: this.props.postId,
+    id: uuidv1(),
   });
 
   handleInputChange = (e) => {
