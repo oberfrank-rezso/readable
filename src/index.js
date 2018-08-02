@@ -10,6 +10,7 @@ import Modal from 'shared/components/Modal';
 
 import store from 'duck/store';
 
+import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 
 ReactDOM.render(

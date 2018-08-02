@@ -33,14 +33,12 @@ class HomeContainer extends React.Component {
     });
   };
 
-  handleCategoryChange = (e) => {
-    const path = e.target.value;
+  handleCategoryChange = (e, { value: path }) => {
     const { search } = this.props.location;
-    this.props.history.push({ pathname: `/${path}`, search });
+    this.props.history.push({ pathname: `/${path === 'all' ? '' : path}`, search });
   };
 
-  handleSortChange = (e) => {
-    const option = e.target.value;
+  handleSortChange = (e, { value: option }) => {
     this.props.history.push({ search: `?sort=${option}` });
   };
 

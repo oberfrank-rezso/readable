@@ -3,11 +3,6 @@ html, body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, sans-serif; }
 
-#root {
-  max-width: 616px;
-  margin: 0 auto;
-  padding: 8px; }
-
 .home-title {
   margin: 8px 0;
   text-align: center; }

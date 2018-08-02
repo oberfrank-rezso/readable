@@ -2,32 +2,32 @@ export const sortingOptions = {
   dateDesc: {
     property: 'timestamp',
     isAscending: false,
-    name: 'Date Desc.',
+    name: 'date desc.',
   },
   dateAsc: {
     property: 'timestamp',
     isAscending: true,
-    name: 'Date Asc.',
+    name: 'date asc.',
   },
   voteDesc: {
     property: 'voteScore',
     isAscending: false,
-    name: 'Vote Desc.',
+    name: 'vote desc.',
   },
   voteAsc: {
     property: 'voteScore',
     isAscending: true,
-    name: 'Vote Asc.',
+    name: 'vote asc.',
   },
   commentDesc: {
     property: 'commentCount',
     isAscending: false,
-    name: 'Comments Desc.',
+    name: 'comments desc.',
   },
   commentAsc: {
     property: 'commentCount',
     isAscending: true,
-    name: 'Comments Asc.',
+    name: 'comments asc.',
   },
 };
 
