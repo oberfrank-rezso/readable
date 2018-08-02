@@ -1,8 +1,7 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as CommentActionCreators from 'duck/commentActions';
+import * as commentActions from 'duck/commentActions';
 import Comments from './Comments';
 
 class CommentsContainer extends React.Component {
@@ -11,7 +10,7 @@ class CommentsContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.props.actions.getByPost(this.props.postId);
+    this.props.getByPost(this.props.postId);
   }
 
   setEditId = (id) => {
@@ -24,13 +23,16 @@ class CommentsContainer extends React.Component {
 
   render = () => {
     const { editId } = this.state;
-    const { comments: rawComments, actions, postId } = this.props;
+    const {
+      comments: rawComments, postId,
+      publish, update, remove, upvote, downvote,
+    } = this.props;
     const comments = Object.values(rawComments).filter(comment => comment.parentId === postId);
 
     return (
       <Comments
         comments={comments}
-        actions={actions}
+        actions={{ publish, update, remove, upvote, downvote }}
         postId={postId}
         editId={editId}
         setEditId={this.setEditId}
@@ -40,15 +42,9 @@ class CommentsContainer extends React.Component {
   };
 }
 
-const mapStateToProps = state => ({
-  comments: state.comments,
-});
-
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(CommentActionCreators, dispatch),
-});
+const mapStateToProps = ({ comments }) => ({ comments });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  commentActions,
 )(CommentsContainer);
