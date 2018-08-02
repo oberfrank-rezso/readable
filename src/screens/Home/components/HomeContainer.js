@@ -95,11 +95,7 @@ class HomeContainer extends React.Component {
   };
 }
 
-const mapStateToProps = state => ({
-  categories: state.categories,
-  posts: state.posts,
-  errorMessage: state.errorMessage,
-});
+const mapStateToProps = ({ categories, posts, errorMessage }) => ({ categories, posts, errorMessage });
 
 const mapDispatchToProps = dispatch => ({
   categoryActions: bindActionCreators(CategoryActionCreators, dispatch),
