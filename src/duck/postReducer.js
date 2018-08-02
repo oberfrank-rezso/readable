@@ -34,7 +34,7 @@ export default (state = {}, action) => {
     }
     case REMOVE_POST_SUCCESS: {
       const { post } = action.payload;
-      const { [post.id]: deltedPost, ...newState } = state;
+      const { [post.id]: deletedPost, ...newState } = state;
       return newState;
     }
     case PUBLISH_COMMENT_SUCCESS: {
